@@ -1,0 +1,43 @@
+在Linux系统下安装MinSVision相机的具体步骤：
+
+1. 解压SDK
+```bash
+tar -xvf linuxSDK_V2.1.0.36.tar.gz
+cd linuxSDK
+```
+
+2. 安装依赖
+```bash
+sudo apt-get update
+sudo apt-get install build-essential cmake
+sudo apt-get install openjdk-8-jdk
+```
+
+3. 编译SDK
+```bash
+mkdir build && cd build
+cmake ..
+make
+sudo make install
+```
+
+4. 设置USB权限
+```bash
+sudo vim /etc/udev/rules.d/99-minsvision.rules
+```
+添加:
+```
+SUBSYSTEM=="usb", ATTRS{idVendor}=="2E67", MODE="0666"
+```
+重载规则:
+```bash
+sudo udevadm control --reload-rules
+```
+
+5. 运行相机软件
+```bash
+cd /opt/minsvision/bin
+./MinSVisionViewer
+```
+
+连接相机后应该能在软件中看到设备。需要其他帮助吗？
